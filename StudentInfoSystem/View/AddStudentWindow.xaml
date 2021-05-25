@@ -1,0 +1,84 @@
+﻿<Window x:Class="StudentInfoSystem.View.AddStudentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentInfoSystem.View"
+        mc:Ignorable="d"
+        Title="AddStudentWindow" Height="500" Width="600">
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60px"/>
+        </Grid.RowDefinitions>
+        
+        <GroupBox Header="Лични данни"  VerticalAlignment="Top" Margin="10,5,10,0" Grid.Row="0" Grid.Column="0">
+            <Grid x:Name="PersonalData">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" MinHeight="40"/>
+                    <RowDefinition Height="Auto" MinHeight="40"/>
+                    <RowDefinition Height="Auto" MinHeight="40"/>
+                </Grid.RowDefinitions>
+                <Label Content="Име:" VerticalAlignment="Center" Grid.Column="0"/>
+                <!-- <TextBox x:Name="firstnameTB" VerticalAlignment="Center" Height="24" Grid.Column="1" Text="{Binding Path=name}"/> -->
+                <!-- <TextBox x:Name="firstnameTB" VerticalAlignment="Center" Height="24" Grid.Column="1" Text="{Binding Source={StaticResource ViewModel}, Path=student.name}"/> -->
+                <!-- Binding LastName,UpdateSourceTrigger=PropertyChanged -->
+                <TextBox x:Name="firstnameTB" VerticalAlignment="Center" Height="24" Grid.Column="1" Text="{Binding student.Name}"/>
+                <Label Content="Презиме:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"></Label>
+                <TextBox x:Name="surnameTB" VerticalAlignment="Center" Height="24" Grid.Column="1" Grid.Row="1" Text="{Binding Path=student.Surname}"/>
+                <Label Content="Фамилия:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"></Label>
+                <TextBox x:Name="lastnameTB" VerticalAlignment="Center" Height="24" Grid.Column="1" Grid.Row="2" Text="{Binding Path=student.FamilyName}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Студентска информация" VerticalAlignment="Top" Margin="10,10,10,5" Grid.Column="1" Grid.Row="1">
+            <Grid x:Name="StudentInformation">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" MinHeight="35"/>
+                    <RowDefinition Height="Auto" MinHeight="35"/>
+                    <RowDefinition Height="Auto" MinHeight="35"/>
+                    <RowDefinition Height="Auto" MinHeight="35"/>
+                    <RowDefinition Height="Auto" MinHeight="35"/>
+                    <RowDefinition Height="Auto" MinHeight="35"/>
+                </Grid.RowDefinitions>
+                <Label Content="Факултет:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                <TextBox x:Name="facultyTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="0" Text="{Binding student.Faculty}"></TextBox>
+
+                <Label Content="Специалност:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"></Label>
+                <ComboBox x:Name="specialtyTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="1" SelectedValue="{Binding student.Specialty}" ItemsSource="{Binding Specialties}" />
+
+                <Label Content="ОКС:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"></Label>
+                <ComboBox x:Name="degreeTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="2"  SelectedValue="{Binding student.QualificationDegree}" ItemsSource="{Binding Degrees}"></ComboBox>
+
+                <Label Content="Статус:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3"></Label>
+                <ComboBox x:Name="statusTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="3" SelectedValue="{Binding student.Status}" ItemsSource="{Binding StudStatusChoices}" />
+
+                <Label Content="Фак. номер:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4"></Label>
+                <TextBox x:Name="facNumTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="4" Text="{Binding student.FacultyNumber}"></TextBox>
+
+                <Label Content="Курс:" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Margin="10,0,0,0"></Label>
+                <TextBox x:Name="courseYearTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="3" Grid.Row="0" Text="{Binding student.CourseYear}"></TextBox>
+                <Label Content="Поток:" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Margin="10,0,0,0"></Label>
+                <TextBox x:Name="streamTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="3" Grid.Row="1" Text="{Binding student.Stream}"></TextBox>
+                <Label Content="Група:" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Margin="10,0,0,0"></Label>
+                <TextBox x:Name="groupTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="3" Grid.Row="2" Text="{Binding student.Group}"></TextBox>
+            </Grid>
+        </GroupBox>
+
+        <Button Command="{Binding addStudentCommand}" CommandParameter="{Binding .}" Grid.Row="2" Width="160px" Height="30px" Margin="0 0 0 5">Добави студент</Button>
+    </Grid>
+</Window>

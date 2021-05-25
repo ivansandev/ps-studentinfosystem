@@ -1,0 +1,46 @@
+﻿<Window x:Class="StudentInfoSystem.View.InspectorReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentInfoSystem"
+        mc:Ignorable="d"
+        Title="InspectorReport" Height="400" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40px"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="32px"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center">Филтър: </Label>
+        <ComboBox x:Name="specialtiesComboBox" Grid.Row="0" Grid.Column="1" Height="28px" Width="200px" HorizontalAlignment="Left" Margin="10 0 0 0" ItemsSource="{Binding Degrees}"  SelectionChanged="filter_SelectionChanged"></ComboBox>
+        
+        <Border Grid.Row="1" Grid.Column="0" Background="CadetBlue" Margin="10,10,10,0" >
+            <Label Content="Група" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="18px" Foreground="White"/>
+        </Border>
+        <ListBox x:Name="groupListBox" Grid.Row="2" Grid.Column="0" Margin="10,0,10,10" ItemsSource="{Binding Groups}" SelectionChanged="filter_SelectionChanged" />
+
+        <Border Grid.Row="1" Grid.Column="1" Background="CornflowerBlue" Margin="10,10,10,0" >
+            <Label Content="Студенти" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="18px" Foreground="White"/>
+        </Border>
+        <ListBox x:Name="studentsListBox" Grid.Row="2" Grid.Column="1" Margin="10,0,10,10" ItemsSource="{Binding CurrGroupStudents}" SelectionChanged="studentsListBox_SelectionChanged"/>
+
+        <Grid Grid.Row="3" Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" x:Name="showStudentInfo" Width="140px" Height="24px" IsEnabled="False" Click="showStudentInfo_Click">Повече инфо</Button>
+
+            <Button Grid.Column="1" x:Name="addStudentButton" Width="140px" Height="24px" IsEnabled="False" Click="addStudentButton_Click">Добави студент</Button>
+        </Grid>
+    </Grid>
+</Window>
