@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StudentInfoSystem"
         xmlns:ViewModel="clr-namespace:StudentInfoSystem.ViewModel"
         mc:Ignorable="d"
-        Title="Студентска Информационна Система" Height="430" Width="800">
+        Title="Студентска Информационна Система" Height="470" Width="800">
     <Grid x:Name="MainGrid">
         <!-- <Grid.Resources>
             <ViewModel:MainWindowVM x:Key="ViewModel" />
@@ -20,7 +20,7 @@
         <Grid Grid.Column="0">
             <GroupBox Header="Снимка" VerticalAlignment="Center" Width="200" Height="266" Padding="20,5,20,5">
                 <GroupBox.Background>
-                    <ImageBrush ImageSource="\\Mac\Home\Desktop\ПС проект\05. UserLogin\StudentInfoSystem\no-photo-available.jpg" />
+                    <ImageBrush ImageSource="\\Mac\Home\Desktop\ПС проект\06. UserLogin\StudentInfoSystem\no-photo-available.jpg" />
                 </GroupBox.Background>
             </GroupBox>
         </Grid>
@@ -71,6 +71,7 @@
                         <RowDefinition Height="Auto" MinHeight="35"/>
                         <RowDefinition Height="Auto" MinHeight="35"/>
                         <RowDefinition Height="Auto" MinHeight="35"/>
+                        <RowDefinition Height="Auto" MinHeight="35"/>
                     </Grid.RowDefinitions>
                     <Label Content="Факултет:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
                     <TextBox x:Name="facultyTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="0" Text="{Binding student.Faculty}"></TextBox>
@@ -87,8 +88,12 @@
 
                     <Label Content="Фак. номер:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4"></Label>
                     <TextBox x:Name="facNumTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="4" Text="{Binding student.FacultyNumber}"></TextBox>
-                    <Label Content="Последно влизане:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5"></Label>
-                    <TextBox x:Name="lastactivityTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="5" ></TextBox>
+
+                    <Label Content="Записан на:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" />
+                    <DatePicker Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Height="25" SelectedDateFormat="Short" FirstDayOfWeek="Monday" SelectedDate="{Binding student.JoinedDate}" />
+
+                    <Label Content="Последно влизане:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6"></Label>
+                    <TextBox x:Name="lastactivityTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="6" ></TextBox>
 
                     <Label Content="Курс:" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Margin="10,0,0,0"></Label>
                     <TextBox x:Name="courseYearTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="3" Grid.Row="0" Text="{Binding student.CourseYear}"></TextBox>

@@ -12,7 +12,13 @@ namespace StudentInfoSystem.ViewModel
 {
     class AddStudentVM : INotifyPropertyChanged
     {
+        // Close handler
+        public Action CloseAction { get; set; }
+
+        // Binding to ComboBox
         public List<StudentSpecialty> Specialties { get; set; }
+        
+        // Binding to ComboBox
         public List<StudentDegrees> Degrees { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -53,7 +59,6 @@ namespace StudentInfoSystem.ViewModel
 
         public List<string> StudStatusChoices { get; set; }
 
-        public Action CloseAction { get; set; }
 
         private void FillStudStatusChoices()
         {
@@ -84,7 +89,6 @@ namespace StudentInfoSystem.ViewModel
                 }
             }
         }
-
 
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {

@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using StudentInfoSystem.Model;
 using StudentInfoSystem.ViewModel;
+using System.Linq;
 
 namespace StudentInfoSystem.View
 {
@@ -61,14 +62,13 @@ namespace StudentInfoSystem.View
 
         private void filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            vm.Filter((int?)groupListBox.SelectedItem, (StudentDegrees?)specialtiesComboBox.SelectedItem);
+            vm.Filter((int?)groupListBox.SelectedItem, (StudentDegrees?)specialtiesComboBox.SelectedItem, OnlyFullTime.IsChecked);
         }
 
         private void showStudentInfo_Click(object sender, RoutedEventArgs e)
         {
             if (studentsListBox.SelectedItem as Student != null)
             {
-                //Student student = (Student)(studentsListBox.SelectedItem as ListBoxItem).DataContext;
                 MainWindow studentWindow = new MainWindow(studentsListBox.SelectedItem as Student);
                 studentWindow.Show();
             }
@@ -76,10 +76,12 @@ namespace StudentInfoSystem.View
 
         private void studentsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (studentsListBox.SelectedItem != null)
-                showStudentInfo.IsEnabled = true;
-            else
-                showStudentInfo.IsEnabled = false;
+            showStudentInfo.IsEnabled = true ? studentsListBox.SelectedItem != null : false;
+        }
+
+        private void OnlyFullTime_Changed(object sender, RoutedEventArgs e)
+        {
+            vm.Filter((int?)groupListBox.SelectedItem, (StudentDegrees?)specialtiesComboBox.SelectedItem, OnlyFullTime.IsChecked);
         }
     }
 }

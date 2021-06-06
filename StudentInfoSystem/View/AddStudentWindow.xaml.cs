@@ -22,6 +22,10 @@ namespace StudentInfoSystem.View
         public AddStudentWindow()
         {
             InitializeComponent();
+            joinedOnDP.SelectedDate = DateTime.Now;
+            joinedOnDP.DisplayDateStart = new DateTime(2010, 1, 1);
+            joinedOnDP.DisplayDateEnd = DateTime.Now;
+
             AddStudentVM vm = new AddStudentVM();
             DataContext = vm;
 

@@ -9,7 +9,7 @@ namespace UserLogin
     public static class Logger
     {
         // NOTE: Променете това съответно на вашата система
-        private const string logFilename = "\\\\Mac\\Home\\Desktop\\ПС проект\\05. UserLogin\\UserLogin\\test.txt";
+        private const string logFilename = "\\\\Mac\\Home\\Desktop\\ПС проект\\06. UserLogin\\UserLogin\\test.txt";
 
         static private List<string> currentSessionActivities = new List<string>();
 

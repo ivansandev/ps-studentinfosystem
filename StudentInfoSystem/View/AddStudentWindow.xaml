@@ -70,6 +70,9 @@
                 <Label Content="Фак. номер:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4"></Label>
                 <TextBox x:Name="facNumTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="1" Grid.Row="4" Text="{Binding student.FacultyNumber}"></TextBox>
 
+                <Label Content="Записан на:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" />
+                <DatePicker x:Name="joinedOnDP" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Height="25" SelectedDateFormat="Short" FirstDayOfWeek="Monday" SelectedDate="{Binding student.JoinedDate}" Text="Test" />
+
                 <Label Content="Курс:" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Margin="10,0,0,0"></Label>
                 <TextBox x:Name="courseYearTB" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25" Grid.Column="3" Grid.Row="0" Text="{Binding student.CourseYear}"></TextBox>
                 <Label Content="Поток:" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Margin="10,0,0,0"></Label>

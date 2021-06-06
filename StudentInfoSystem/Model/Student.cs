@@ -22,8 +22,9 @@ namespace StudentInfoSystem.Model
         public int? Stream { get; set; } // поток
         public int? Group { get; set; }
         public byte?[] Photo { get; set; }
+        public DateTime JoinedDate { get; set; }
 
-        public Student(string name, string surname, string lastname, string faculty, StudentSpecialty specialty, StudentDegrees qualificationDegree, string status, string facultyNumber, short courseYear, int stream, int group)
+        public Student(string name, string surname, string lastname, string faculty, StudentSpecialty specialty, StudentDegrees qualificationDegree, string status, string facultyNumber, short courseYear, int stream, int group, DateTime joinedDate)
         {
             this.Name = name;
             this.Surname = surname;
@@ -36,9 +37,12 @@ namespace StudentInfoSystem.Model
             this.CourseYear = courseYear;
             this.Stream = stream;
             this.Group = group;
+            this.JoinedDate = joinedDate;
         }
 
-        public Student() { }
+        public Student() {
+            this.JoinedDate = DateTime.Now;
+        }
 
         public override string ToString()
         {

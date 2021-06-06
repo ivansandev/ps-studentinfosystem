@@ -36,7 +36,8 @@ namespace StudentInfoSystem.Model
                 FacultyNumber = "121218000",
                 CourseYear = 3,
                 Stream = 9,
-                Group = 51
+                Group = 51,
+                JoinedDate = new DateTime(2018, 8, 1)
             });
             _testStudents.Add(new Student
             {
@@ -50,7 +51,8 @@ namespace StudentInfoSystem.Model
                 FacultyNumber = "7654321",
                 CourseYear = 2,
                 Stream = 9,
-                Group = 52
+                Group = 52,
+                JoinedDate = new DateTime(2018, 8, 1)
             });
             _testStudents.Add(new Student
             {
@@ -64,7 +66,8 @@ namespace StudentInfoSystem.Model
                 FacultyNumber = "121218557",
                 CourseYear = 4,
                 Stream = 9,
-                Group = 52
+                Group = 52,
+                JoinedDate = new DateTime(2018, 8, 1)
             });
         }
     }

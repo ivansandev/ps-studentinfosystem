@@ -13,24 +13,44 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40px"/>
+            <RowDefinition Height="45px"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
-            <RowDefinition Height="32px"/>
+            <RowDefinition Height="40px"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center">Филтър: </Label>
-        <ComboBox x:Name="specialtiesComboBox" Grid.Row="0" Grid.Column="1" Height="28px" Width="200px" HorizontalAlignment="Left" Margin="10 0 0 0" ItemsSource="{Binding Degrees}"  SelectionChanged="filter_SelectionChanged"></ComboBox>
-        
+        <!-- FILTERING -->
+        <Grid Grid.Row="0" Grid.Column="0" Margin="10,10,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">Филтър:</Label>
+            <ComboBox x:Name="specialtiesComboBox" Grid.Row="0" Grid.Column="1" Height="28px" Width="150px" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0" ItemsSource="{Binding Degrees}"  SelectionChanged="filter_SelectionChanged"/>
+        </Grid>
+
+        <!-- VIEW OPTIONS -->
+        <Grid Grid.Row="0" Grid.Column="1" Margin="10,10,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="OnlyFullTime" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="OnlyFullTime_Changed" Unchecked="OnlyFullTime_Changed">Редовни Студенти</CheckBox>
+            <!-- <RadioButton x:Name="BasicView" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="0,0,0,20" Checked="BasicView_Checked">Основен</RadioButton>
+            <RadioButton x:Name="AdvancedView" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Checked="AdvancedView_Checked">Подробен</RadioButton> -->
+        </Grid>
+
+        <!-- GROUPS -->
         <Border Grid.Row="1" Grid.Column="0" Background="CadetBlue" Margin="10,10,10,0" >
             <Label Content="Група" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="18px" Foreground="White"/>
         </Border>
-        <ListBox x:Name="groupListBox" Grid.Row="2" Grid.Column="0" Margin="10,0,10,10" ItemsSource="{Binding Groups}" SelectionChanged="filter_SelectionChanged" />
+        <ListBox x:Name="groupListBox" Grid.Row="2" Grid.Column="0" Margin="10,0,10,0" ItemsSource="{Binding Students.Keys}" SelectionChanged="filter_SelectionChanged" />
 
+        <!-- STUDENTS -->
         <Border Grid.Row="1" Grid.Column="1" Background="CornflowerBlue" Margin="10,10,10,0" >
             <Label Content="Студенти" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="18px" Foreground="White"/>
         </Border>
-        <ListBox x:Name="studentsListBox" Grid.Row="2" Grid.Column="1" Margin="10,0,10,10" ItemsSource="{Binding CurrGroupStudents}" SelectionChanged="studentsListBox_SelectionChanged"/>
+        <ListBox x:Name="studentsListBox" Grid.Row="2" Grid.Column="1" Margin="10,0,10,0" ItemsSource="{Binding FilteredStudents}" SelectionChanged="studentsListBox_SelectionChanged"/>
 
         <Grid Grid.Row="3" Grid.Column="1" >
             <Grid.ColumnDefinitions>
@@ -38,9 +58,10 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" x:Name="showStudentInfo" Width="140px" Height="24px" IsEnabled="False" Click="showStudentInfo_Click">Повече инфо</Button>
+            <Button Grid.Column="0" x:Name="showStudentInfo" Width="140px" Height="26px" IsEnabled="False" Click="showStudentInfo_Click">Повече инфо</Button>
 
-            <Button Grid.Column="1" x:Name="addStudentButton" Width="140px" Height="24px" IsEnabled="False" Click="addStudentButton_Click">Добави студент</Button>
+            <Button Grid.Column="1" x:Name="addStudentButton" Width="140px" Height="26px" IsEnabled="False" Click="addStudentButton_Click">Добави студент</Button>
         </Grid>
+        <RadioButton Content="RadioButton" Grid.Column="1" HorizontalAlignment="Left" Margin="571,43,0,0" Grid.Row="2" VerticalAlignment="Top"/>
     </Grid>
 </Window>

@@ -20,23 +20,27 @@ namespace StudentInfoSystem.ViewModel
             }
         }
 
+        // Binding to ComboBox for filtering
         public List<StudentDegrees> Degrees { get; set; }
-        public List<Student> Students { get; private set; }
-        public IEnumerable<Student> _currGroupStudents;
-        public IEnumerable<Student> CurrGroupStudents
+
+        public Dictionary<int, List<Student>> Students { get; private set; }
+
+        // CurrGroupStudents is used for filtering students from selected group
+        public IEnumerable<Student> _filteredStudents;
+        public IEnumerable<Student> FilteredStudents
         {
-            get { return _currGroupStudents; }
+            get { return _filteredStudents; }
             set
             {
-                if (_currGroupStudents != value)
+                if (_filteredStudents != value)
                 {
-                    _currGroupStudents = value;
-                    OnPropertyChanged("CurrGroupStudents");
+                    _filteredStudents = value;
+                    OnPropertyChanged("FilteredStudents");
                 }
             }
         }
-        public List<int> Groups { get; private set; }
 
+        // Binding to ListBox
         private Student _selectedStudent;
         public Student SelectedStudent
         {
@@ -54,31 +58,22 @@ namespace StudentInfoSystem.ViewModel
 
         public InspectorReportVM()
         {
-            Groups = new List<int>();
-            Students = new List<Student>();
-            // CurrGroupStudents = new List<Student>();
+            Students = new Dictionary<int, List<Student>>();
 
             InitializeStudents();
-            InitializeGroups();
             InitializeDegrees();
         }
 
         private void InitializeStudents()
         {
-            Students = new List<Student>();
             StudentInfoContext context = new StudentInfoContext();
             foreach (Student student in context.Students)
-                Students.Add(student);
-        }
+            {
+                if (!Students.ContainsKey((int)student.Group))
+                    Students.Add((int)student.Group, new List<Student>());
+                Students[(int)student.Group].Add(student);
+            }
 
-        private void InitializeGroups()
-        {
-            // проверява да няма дублиране на групи
-            foreach (Student student in Students)
-                if (!Groups.Contains((int)student.Group))
-                    Groups.Add((int)student.Group);
-
-            Groups.Sort();
         }
 
         private void InitializeDegrees()
@@ -86,15 +81,22 @@ namespace StudentInfoSystem.ViewModel
             Degrees = Enum.GetValues(typeof(StudentDegrees)).Cast<StudentDegrees>().ToList();
         }
 
-        public void Filter(int? groupQuery, StudentDegrees? degreeQuery)
+        public void Filter(int? groupQuery, StudentDegrees? degreeQuery, bool? onlyFulltimeStudents)
         {
-            // Show students only from selected group
-            if (groupQuery != null && degreeQuery != null)
-                CurrGroupStudents = from student in Students where student.Group == groupQuery && student.QualificationDegree == degreeQuery select student;
-            else if (groupQuery == null)
-                CurrGroupStudents = from student in Students where student.QualificationDegree == degreeQuery select student;
-            else if (degreeQuery == null)
-                CurrGroupStudents = from student in Students where student.Group == groupQuery select student;
+            // Show students only from selected group and selected degree type
+            
+            // Validate that group is selected
+            if (groupQuery == null)
+                return;
+            
+            // Apply filtering to QualificationDegree only if its selected
+            if (degreeQuery != null)
+                FilteredStudents = from student in Students[(int)groupQuery] where student.QualificationDegree == degreeQuery select student;
+            else
+                FilteredStudents = from student in Students[(int)groupQuery] select student;
+
+            if (onlyFulltimeStudents == true)
+                FilteredStudents = from student in FilteredStudents where student.Status == "Редовен" select student;
         }
     }
 }
